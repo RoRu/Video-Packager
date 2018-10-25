@@ -1,5 +1,7 @@
 #!/usr/bin/env cwl-runner
 
+# Шаг с примером использования ExpressionTool
+
 cwlVersion: v1.0
 class: ExpressionTool
 
@@ -17,6 +19,7 @@ outputs:
   ans: 
     type: string
 
+# Expression задано как NodeJS код.
 expression: |
   ${
     var secretNumber = parseInt(inputs.secretFile.contents.trim());
