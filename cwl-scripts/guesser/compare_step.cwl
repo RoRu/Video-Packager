@@ -19,7 +19,7 @@ outputs:
   ans: 
     type: string
 
-# Expression задано как NodeJS код.
+# Expression задано как NodeJS код, возвращающий мапу определённую в outputs.
 expression: |
   ${
     var secretNumber = parseInt(inputs.secretFile.contents.trim());
