@@ -1,18 +1,10 @@
-Для работы уcтановить cwl:
-
-    `pip install cwlref-runner`
-    
-или
+##### Установка зависимостей: 
  
-    `pip install -r requirements.txt`
+    pip install -r requirements.txt
 
 
-Принимает в качестве аргументов:
-1. CWL-скрипт
-2. аргументы для CWL-скрипта
+##### Запуск:
 
-Проверить: 
+##### Проверка: 
 
-    `python hello_world.py 1st-tool.cwl echo-job.yml`
-
-Так же можно запустить без аргументов, тогда вызовется функция use_import, которая использует библиотеку cwltool
+    python runner.py ../cwl-scripts/hello-world/1st-tool.cwl ../cwl-scripts/hello-world/echo-job.yml
