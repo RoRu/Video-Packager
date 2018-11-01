@@ -1,18 +1,16 @@
 ## Primitive Python runner for CWL scripts
 
 #### Requirements:
-    
 *       Python 3.6+
 *       pip install -r requirements.txt
 
 
 #### Usage:
- 
     runner.py [-h] [-s] script_path args_path
 
 
 ###### For example:
-`python runner.py -s ../cwl-scripts/guesser/guesser.cwl ../cwl-scripts/guesser/guesser-job.yml`
+    python runner.py -s ../cwl-scripts/guesser/guesser.cwl ../cwl-scripts/guesser/guesser-job.yml
 
 
 **Positional arguments**:
