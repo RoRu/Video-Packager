@@ -10,9 +10,9 @@ def run_in_subprocess(script_path, args_path):
 def run(script_path, args_path):
     from cwltool.factory import Factory
     import yaml
-    echo = Factory().make(script_path)
+    workflow = Factory().make(script_path)
     with open(args_path, 'r') as f:
-        print(echo(**yaml.safe_load(f)))
+        print(workflow(**yaml.safe_load(f)))
 
 
 if __name__ == '__main__':
