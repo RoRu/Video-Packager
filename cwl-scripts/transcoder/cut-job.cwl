@@ -1,21 +1,30 @@
-cwlVersion: v1.0
 class: CommandLineTool
-baseCommand: ffmpeg
-
-arguments: [-y, -c, copy, video_4k.mp4]
-
+cwlVersion: v1.0
+$namespaces:
+  sbg: 'https://www.sevenbridges.com'
+baseCommand:
+  - ffmpeg
 inputs:
-  input_file:
+  - id: input_file
     type: File
     inputBinding:
-      prefix: -i
-  seconds:
+      position: -1
+      prefix: '-i'
+  - default: '1'
+    id: seconds
     type: string
     inputBinding:
-      prefix: -t
-
+      position: -1
+      prefix: '-t'
 outputs:
-  cut_video:
+  - id: cut_video
     type: File
     outputBinding:
-      glob: video_4k.mp4
+      glob: '*.mp4'
+arguments:
+  - '-preset'
+  - ultrafast
+  - '-y'
+  - '-c'
+  - copy
+  - video_4k.mp4

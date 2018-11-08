@@ -1,17 +1,22 @@
-cwlVersion: v1.0
 class: CommandLineTool
-baseCommand: ffprobe
-
-arguments: [-v, quiet, -print_format, json, -show_format, -show_streams]
-
+cwlVersion: v1.0
+baseCommand:
+  - ffprobe
 inputs:
-  input_file:
+  - id: input_file
     type: File
     inputBinding:
       position: 1
-
 outputs:
-  json_file:
-    type: stdout
-
+  - id: json_file
+    type: File
+    outputBinding:
+      glob: '*.json'
+arguments:
+  - '-v'
+  - quiet
+  - '-print_format'
+  - json
+  - '-show_format'
+  - '-show_streams'
 stdout: properties.json

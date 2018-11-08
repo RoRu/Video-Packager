@@ -17,14 +17,18 @@ outputs:
 expression: |
   ${
     var contents = inputs.json_file.contents;
-    var properties = JSON.parse(contents).streams[0];
-    if (properties["codec_type"] === "video") {
-        if (properties["width"] >= 3840) {
-            if (properties["height"] <= 2160) {
-                console.log("OK");
-                return ({"answer": "OK"});
+    var props = JSON.parse(contents);
+    var vstream = props.streams[0];
+    if (vstream["codec_type"] === "video") {
+        if (vstream["width"] >= 3840) {
+            if (vstream["height"] <= 2160) {
+                console.log(props.format["duration"]);
+                console.log("I AM HERE")
+                return ({"answer": "-y"});
+            } else {
+                console.log("I AM THERE")
+                return ({"answer": "Invalid video"})
             }
         }
     }
-
   }
