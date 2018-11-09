@@ -4,7 +4,7 @@ $namespaces:
   sbg: 'https://www.sevenbridges.com'
 id: pass2
 baseCommand:
-  -
+  - ffmpeg
 inputs:
   - default: '24'
     id: fps
@@ -31,11 +31,13 @@ inputs:
     type: string
     inputBinding:
       position: 0
+  - id: log_file
+    type: File
 outputs:
   - id: transcoded_video
     type: File
     outputBinding:
-      glob: 'transcoded_video_4k.mp4'
+      glob: transcoded_video_4k.mp4
 label: pass2
 arguments:
   - '-y'
@@ -48,7 +50,8 @@ arguments:
   - '-tune'
   - zerolatency
   - '-x265-params'
-  - 'log-level=full:input-res=3840x2160:fps=24:level-idc=5.0:high-tier=1:sar=1:no-open-gop=1:keyint=$(inputs.keyint):min-keyint=$(inputs.keyint):scenecut=0:no-scenecut=1:colorprim=bt709:bitrate=20000:vbv-maxrate=30000:vbv-bufsize=40000:pass=1'
+  - >-
+    log-level=full:input-res=3840x2160:fps=24:level-idc=5.0:high-tier=1:sar=1:no-open-gop=1:keyint=$(inputs.keyint):min-keyint=$(inputs.keyint):scenecut=0:no-scenecut=1:colorprim=bt709:bitrate=20000:vbv-maxrate=30000:vbv-bufsize=40000:pass=2
   - '-an'
   - '-map'
   - '0:v:0'
@@ -57,6 +60,3 @@ arguments:
   - mp4
 requirements:
   - class: InlineJavascriptRequirement
-  - class: InitialWorkDirRequirement
-    listing:
-      - $(inputs.script)

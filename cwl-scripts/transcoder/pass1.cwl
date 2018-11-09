@@ -26,8 +26,7 @@ inputs:
   - default: '48'
     id: keyint
     type: string
-  - default: '-y'
-    id: verification
+  - id: verification
     type: string
     inputBinding:
       position: -2
@@ -35,7 +34,7 @@ outputs:
   - id: log_file
     type: File
     outputBinding:
-      glob: 'transcoded_video_4k.mp4'
+      glob: '*.log'
 label: pass1
 arguments:
   - '-vsync'

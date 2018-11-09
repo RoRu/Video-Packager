@@ -27,7 +27,7 @@ expression: |
                 return ({"answer": "-y"});
             } else {
                 console.log("I AM THERE")
-                return ({"answer": "Invalid video"})
+                return ({"answer": "Video parameters validation failed"})
             }
         }
     }
