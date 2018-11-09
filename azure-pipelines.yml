@@ -31,9 +31,3 @@ jobs:
       pip install flake8
       flake8 --max-line-length=119
     displayName: 'Code style check'
-
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFiles: '**/test-results.xml'
-      testRunTitle: 'Python $(python.version)'
-    condition: succeededOrFailed()
