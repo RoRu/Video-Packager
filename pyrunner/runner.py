@@ -7,8 +7,7 @@ from cwltool import factory, context
 
 
 def run_in_subprocess(cwl_args, script_path, args_path):
-    args = cwl_args if cwl_args is not None else []
-    cwl_command = ['cwl-runner', *args, script_path, args_path]
+    cwl_command = ['cwl-runner', *cwl_args, script_path, args_path]
     call(cwl_command)
 
 
