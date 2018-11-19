@@ -6,11 +6,11 @@
 
 
 #### Usage:
-    runner.py [-h] [-s] script_path args_path
+    runner.py [-h] [-s] [--cwl-args CWL_ARGS] script_path args_path
 
 
 ###### For example:
-    python runner.py -s ../cwl-scripts/guesser/guesser.cwl ../cwl-scripts/guesser/guesser-job.yml
+    python runner.py -s --cwl-args "--outdir ./.tmp" ../cwl-scripts/guesser/guesser.cwl ../cwl-scripts/guesser/guesser-job.yml
 
 
 **Positional arguments**:
@@ -19,6 +19,7 @@
     args_path         path to script arguments
 
 **Optional arguments**:
-
+    
     -h, --help        show this help message and exit
     -s, --subprocess  run script in separate process
+    --cwl-args CWL_ARGS  command line arguments for cwl-runner (see "cwl-runner -h" for more info)
