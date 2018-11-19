@@ -57,4 +57,7 @@ arguments:
   - '-f'
   - mp4
 requirements:
+  - class: InitialWorkDirRequirement
+    listing:
+      - $(inputs.log_file)
   - class: InlineJavascriptRequirement
