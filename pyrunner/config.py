@@ -15,18 +15,18 @@ DEFAULT_CONFIG = {
 }
 
 
-def init_config(conf_file=DEFAULT_CONFIG_FILE):
+def init_config(conf_path=DEFAULT_CONFIG_FILE):
     """
     init config from file
-    :param conf_file: main config file
+    :param conf_path: main config file
     """
-    Config(conf_file)
+    Config(conf_path)
 
 
 class Config(UserDict):
     """
-    Thread-safe object for configs
-    user interface is dict-like
+    Thread-safe object for configs with dict-like user interface
+    call init_config() for default config initialization
 
     Example usage:
         conf = Config()
@@ -36,27 +36,33 @@ class Config(UserDict):
 
     _lock = Lock()
     _is_loaded = False
-    _config_file = None
+    _conf_path = None
 
-    def __init__(self, conf_file):
+    def __init__(self, conf_path=None):
         """
         Read config from config_file and merge it with default configs
-        :param conf_file: path to config file
+        :param conf_path: path to config file
         """
-        with self._lock:
-            if not self._is_loaded:
-                self.data = copy.deepcopy(DEFAULT_CONFIG)
-                self.data.update(self.__load_config(conf_file))
-                self._is_loaded = True
+        with Config._lock:
+            if not Config._is_loaded:
+                Config.data = copy.deepcopy(DEFAULT_CONFIG)
+                main_conf = self._load_config(conf_path)
+                for section, value in main_conf.items():
+                    Config.data[section].update(value)
+                Config._is_loaded = True
 
     def __getattr__(self, item):
-        with self._lock:
-            assert self._is_loaded, 'Load config first'
-            return self[item]
+        with Config._lock:
+            assert Config._is_loaded, 'Load config first'
+            return Config.data[item]
 
-    def __load_config(self, conf_file):
-        self._config_file = conf_file
+    @staticmethod
+    def _load_config(conf_path):
+        if not conf_path:
+            return {}
+
+        Config._conf_path = conf_path
         config = configparser.ConfigParser()
-        with open(conf_file) as conf_file_obj:
+        with open(conf_path) as conf_file_obj:
             config.read_file(conf_file_obj)
         return {sect: dict(config.items(sect)) for sect in config.sections()}
