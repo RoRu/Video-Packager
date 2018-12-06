@@ -7,6 +7,8 @@ from subprocess import call
 import yaml
 from cwltool import factory, context
 
+from pyrunner.config import init_config
+
 
 def run_in_subprocess(cwl_args, script_path, args_path):
     cwl_command = ['cwl-runner', *cwl_args, script_path, args_path]
@@ -40,6 +42,8 @@ def run(cwl_args, script_path, args_path):
 
 
 if __name__ == '__main__':
+    init_config()
+
     parser = argparse.ArgumentParser(description='Python runner for CWL scripts.')
     parser.add_argument('-s', '--subprocess', action='store_true', help='run script in separate process')
     parser.add_argument(

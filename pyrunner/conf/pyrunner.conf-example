@@ -1,0 +1,4 @@
+[cwl]
+
+cwl_folder = cwl-scripts
+contract_file = contract.yml
